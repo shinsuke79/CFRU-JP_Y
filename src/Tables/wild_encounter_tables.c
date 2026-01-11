@@ -19,6 +19,24 @@ tables to edit:
 
 #ifndef UNBOUND //Modify this section
 
+static const struct WildPokemon sRoute1_LandMonsDay[] =
+{
+	{2, 4, SPECIES_PIDGEY},
+	{2, 4, SPECIES_RATTATA},
+	{2, 4, SPECIES_PIDGEY},
+	{2, 4, SPECIES_RATTATA},
+	{3, 5, SPECIES_PIDGEY},
+	{3, 5, SPECIES_RATTATA},
+	{3, 5, SPECIES_PIDGEY},
+	{3, 5, SPECIES_CHIKORITA},
+	{4, 5, SPECIES_PIDGEY},
+	{4, 5, SPECIES_RATTATA},
+	{4, 5, SPECIES_PIDGEY},
+	{4, 5, SPECIES_RATTATA},
+};
+
+static const struct WildPokemonInfo sRoute1_LandMonsInfoDay = {20, sRoute1_LandMonsDay};
+
 const struct WildPokemonHeader gWildMonMorningHeaders[] =
 {
 	{
@@ -57,6 +75,14 @@ const struct WildPokemonHeader gWildMonNightHeaders[] =
 
 const struct WildPokemonHeader gWildMonDayHeaders[] =
 {
+	{
+		.mapGroup = MAP_GROUP(ROUTE_1),
+		.mapNum = MAP_NUM(ROUTE_1),
+		.landMonsInfo = &sRoute1_LandMonsInfoDay,
+		.waterMonsInfo = NULL,
+		.rockSmashMonsInfo = NULL,
+		.fishingMonsInfo = NULL,
+	},
 	{
 		.mapGroup = 0xFF,
 		.mapNum = 0xFF,
@@ -391,9 +417,9 @@ static const struct WildPokemon sRoute1_LandMonsDay[] =
 	{2, 4, SPECIES_RATTATA},
 	{3, 5, SPECIES_PIDGEY},
 	{3, 5, SPECIES_RATTATA},
-	{3, 5, SPECIES_CHIKORITA},
 	{3, 5, SPECIES_PIDGEY},
-	{4, 5, SPECIES_CHIKORITA},
+	{3, 5, SPECIES_CHIKORITA},
+	{4, 5, SPECIES_PIDGEY},
 	{4, 5, SPECIES_RATTATA},
 	{4, 5, SPECIES_PIDGEY},
 	{4, 5, SPECIES_RATTATA},
