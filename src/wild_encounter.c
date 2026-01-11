@@ -59,6 +59,7 @@ extern u8 sUnownLetterSlots[NUM_TANOBY_CHAMBERS][12]; //[NUM_ROOMS][NUM_WILD_IND
 extern const struct WildPokemonHeader gWildMonMorningHeaders[];
 extern const struct WildPokemonHeader gWildMonEveningHeaders[];
 extern const struct WildPokemonHeader gWildMonNightHeaders[];
+extern const struct WildPokemonHeader gWildMonDayHeaders[];
 extern const u8 gSwarmOrders[31][24];
 extern const struct SwarmData gSwarmTable[];
 extern const u16 gSwarmTableLength;
@@ -212,6 +213,7 @@ static const struct WildPokemonHeader* GetCurrentMapWildMonHeader(void)
 static const struct WildPokemonHeader* GetCurrentMapWildMonDaytimeHeader(void)
 {
 	u32 i;
+	const struct WildPokemonHeader* wildHeader = NULL;
 
 	if (gWildDataSwitch != NULL)
 	{
@@ -232,9 +234,21 @@ static const struct WildPokemonHeader* GetCurrentMapWildMonDaytimeHeader(void)
 		sSavedWildDataMapNum = gSaveBlock1->location.mapNum;
 	}
 
+	for (i = 0; gWildMonDayHeaders[i].mapGroup != 0xFF; ++i)
+	{
+		wildHeader = &gWildMonDayHeaders[i];
+
+		if (wildHeader->mapGroup == gSaveBlock1->location.mapGroup
+		&&  wildHeader->mapNum   == gSaveBlock1->location.mapNum)
+		{
+			sSavedWildDataDaytimeHeader = wildHeader;
+			return wildHeader;
+		}
+	}
+
 	for (i = 0; gWildMonHeaders[i].mapGroup != 0xFF; ++i)
 	{
-		const struct WildPokemonHeader* wildHeader = &gWildMonHeaders[i];
+		wildHeader = &gWildMonHeaders[i];
 
 		if (wildHeader->mapGroup == gSaveBlock1->location.mapGroup
 		&&  wildHeader->mapNum   == gSaveBlock1->location.mapNum)
